@@ -267,7 +267,8 @@ namespace lab_5_6
 
                 PrintRagArray(ragArr);
                 return ragArr;
-            } else if (answer == 2)
+            } 
+            else if (answer == 2)
             {
                 // пользовательский ввод
                 int rows = NaturalIntegerInput("Количество строк: ");
@@ -286,7 +287,8 @@ namespace lab_5_6
 
                 PrintRagArray(ragArr);
                 return ragArr;
-            } else
+            }
+            else
             {
                 return null;
             }
@@ -329,6 +331,44 @@ namespace lab_5_6
 
             PrintRagArray(newArr);
             return newArr;
+        }
+
+        static string GetStringTest()
+        {
+
+            bool isCorrect;
+            int answer;
+            string test = "";
+            Dictionary<int, string> tests = new Dictionary<int, string>();
+
+            tests[1] = "if a then do b";
+            tests[2] = "if If then DO null const a var b";
+            tests[3] = "в charcharcharcharchar родилась ёлочка";
+
+            Console.WriteLine("Выберите из списка: ");
+            for(int i = 1; i < 4; i++)
+            {
+                Console.WriteLine($"{i}. {tests[i]}");
+            }
+
+            do
+            {
+                isCorrect = int.TryParse(Console.ReadLine(), out answer);
+                if (answer < 1 || answer > 3)
+                {
+                    isCorrect = false;
+                    Console.WriteLine("Введите номер из списка!");
+                }
+                if (!isCorrect)
+                {
+                    Console.WriteLine("Неверный ввод!");
+                } else
+                {
+                    Console.WriteLine($"Ваш выбор: {tests[answer]}");
+                }
+            } while (!isCorrect);
+
+            return tests[answer];
         }
 
         static void DetectCsharpWords(string input)
@@ -387,6 +427,7 @@ namespace lab_5_6
                     "4. Удалить строки начиная с номера K1 и заканчивая номером К2 включительно\n" +
                     "5. Ввести строку из предложений.\n" +
                     "6. Определить есть ли в строке ключевые слова C#. Если есть, то напечатать сколько раз встречается каждое слово\n" +
+                    "7. Получить строку для тестирования\n" +
                     "0. ВЫХОД\n"
                     );
                 switch (answer)
@@ -413,6 +454,9 @@ namespace lab_5_6
                         break;
                     case 6:
                         DetectCsharpWords(str);
+                        break;
+                    case 7:
+                        str = GetStringTest();
                         break;
                 }
             } while (answer != 0);
